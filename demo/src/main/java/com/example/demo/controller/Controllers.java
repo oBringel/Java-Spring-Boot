@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -15,16 +16,23 @@ public class Controllers {
     @Autowired
     private ServiceUsuario serviceUsuario;
 
+    @GetMapping("/")
+    public ResponseEntity<Optional<Usuarios>> get(@RequestBody Usuarios usuarios){
+        Optional<Usuarios> listarPorId = serviceUsuario.procurarPorCpf(usuarios.getCpf());
+
+        return ResponseEntity.ok(listarPorId);
+    }
+
+
     @PostMapping("/cadastro")
     public ResponseEntity<Usuarios> salvar(@RequestBody UsersResquestDTO usersResquestDTO){
        try{
-           // aqui eu passo no parametro o cpf que o usuario vai mandar, e assim ele valida se existe ou não
+             // aqui eu passo no parametro o cpf que o usuario vai mandar, e assim ele valida se existe ou não
           Optional<Usuarios> buscarUsuarios = serviceUsuario.procurarPorCpf(usersResquestDTO.cpf());
-
-            //se existir, ele vai atualizar apenas o nome, então nos pegamos os getters do buscarUsuarios( que está recebendo o metodo procurarPorCpf)
+             //se existir, ele vai atualizar apenas o nome, então nos pegamos os getters do buscarUsuarios( que está recebendo o metodo procurarPorCpf)
            if(buscarUsuarios.isPresent()){
                Usuarios busca = buscarUsuarios.get();
-               // com isso, nos criamos um nome Usuário, passando o mesmo Id ja existente, passando o novo nome, e passando o mesmo cpf existente
+               // com isso, nos criamos um nome Usuário, passando o mesmo Id ja existente,  o novo nome, e o mesmo cpf existente
                Usuarios atualizado = new Usuarios(
                        busca.getId(),
                        usersResquestDTO.nome(),
@@ -40,6 +48,21 @@ public class Controllers {
        }catch (Exception e){
            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
+
+    }
+
+
+    @DeleteMapping
+    public void excluir(@RequestBody UsersResquestDTO usersResquestDTO){
+        Optional<Usuarios> buscarUsuarios = serviceUsuario.deleteByCpf(usersResquestDTO.cpf());
+
+
+        if (buscarUsuarios.isPresent()){
+            Usuarios deletar = buscarUsuarios.get();
+            Usuarios deletado = serviceUsuario.deleteByCpf(deletar.getCpf());
+        }
+
+
 
     }
 

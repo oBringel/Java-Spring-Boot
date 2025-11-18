@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface UsersRepository extends JpaRepository<Usuarios, Long> {
     Optional<Usuarios> findByCpf(Long cpf);
+    Usuarios deleteByCpf(Long cpf);
 }

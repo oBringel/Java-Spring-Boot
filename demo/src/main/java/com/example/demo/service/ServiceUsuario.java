@@ -23,6 +23,7 @@ public class ServiceUsuario {
         return usersRepository.save(usuario);
     }
     public Usuarios salvar(Usuarios usuario) {
+
         return usersRepository.save(usuario);
     }
 
@@ -34,11 +35,17 @@ public class ServiceUsuario {
         return usersRepository.findById(id);
     }
 
+
     public Optional<Usuarios> procurarPorCpf(Long cpf){
         return usersRepository.findByCpf(cpf);
     }
 
+
     public void deletarPorId(Long id){
         usersRepository.deleteById(id);
+    }
+
+    public Usuarios deleteByCpf(Long cpf){
+        return usersRepository.deleteByCpf(cpf);
     }
 }
