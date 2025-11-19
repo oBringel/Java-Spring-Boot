@@ -7,7 +7,7 @@ public class Usuarios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private boolean ativo;
+    private boolean ativo = true;
     private String nome;
     private Long cpf;
 

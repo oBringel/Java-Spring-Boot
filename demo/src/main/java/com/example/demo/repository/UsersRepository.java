@@ -16,12 +16,12 @@ public interface UsersRepository extends JpaRepository<Usuarios, Long> {
 
 
     @Modifying
-    @Query("UPDATE Usuario u SET u.ativo = false WHERE u.cpf = :cpf")
+    @Query("UPDATE Usuarios u SET u.ativo = false WHERE u.cpf = :cpf")
     void desativar(@Param("cpf") Long cpf);
 
 
     @Modifying
-    @Query("UPDATE Usuario u SET u.ativo = ativo WHERE u.cpf = :cpf")
+    @Query("UPDATE Usuarios u SET u.ativo = ativo WHERE u.cpf = :cpf")
     void ativar (@Param("cpf") Long cpf);
 
 }

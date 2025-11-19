@@ -63,6 +63,7 @@ public class ServiceUsuario {
     @Transactional
     public Usuarios ativar(Long cpf){
        Optional<Usuarios> optional = usersRepository.findByCpf(cpf);
+
         if (optional.isPresent()){
             usersRepository.ativar(cpf);
             Usuarios usuarios2 = optional.get();
