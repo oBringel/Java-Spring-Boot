@@ -68,4 +68,17 @@ public class Controllers {
 
     }
 
+    @Transactional
+    @PatchMapping("/ativar")
+    public  ResponseEntity<Usuarios> ativar (@RequestBody Usuarios usuarios){
+        Optional<Usuarios> buscarCpf = serviceUsuario.procurarPorCpf(usuarios.getCpf());
+        if (buscarCpf.isPresent()){
+            Usuarios atualizado = serviceUsuario.ativar(usuarios.getCpf());
+            return ResponseEntity.ok(atualizado);
+        }else {
+            return  ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+
+    }
+
 }
