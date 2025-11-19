@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.model.DTOs.UsersResquestDTO;
 import com.example.demo.model.Usuarios;
 import com.example.demo.service.ServiceUsuario;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +19,15 @@ public class Controllers {
 
     @GetMapping("/")
     public ResponseEntity<Optional<Usuarios>> get(@RequestBody Usuarios usuarios){
-        Optional<Usuarios> listarPorId = serviceUsuario.procurarPorCpf(usuarios.getCpf());
+        Optional<Usuarios> listarPorCpf = serviceUsuario.procurarPorCpf(usuarios.getCpf());
 
-        return ResponseEntity.ok(listarPorId);
+        return ResponseEntity.ok(listarPorCpf);
     }
-
+    @GetMapping("/usuarios")
+    public ResponseEntity<Optional<Usuarios>> getTodosUsuarios (@RequestBody  Usuarios usuarios){
+        Optional<Usuarios> listarPorId = serviceUsuario.procurarPorId(usuarios.getId());
+        return  ResponseEntity.ok(listarPorId);
+    }
 
     @PostMapping("/cadastro")
     public ResponseEntity<Usuarios> salvar(@RequestBody UsersResquestDTO usersResquestDTO){
@@ -48,21 +53,18 @@ public class Controllers {
        }catch (Exception e){
            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
-
     }
 
-
-    @DeleteMapping
-    public void excluir(@RequestBody UsersResquestDTO usersResquestDTO){
-        Optional<Usuarios> buscarUsuarios = serviceUsuario.deleteByCpf(usersResquestDTO.cpf());
-
-
+    @Transactional
+    @PatchMapping("/inativar")
+    public ResponseEntity<Usuarios> inativar(@RequestBody Usuarios usuarios){
+        Optional<Usuarios> buscarUsuarios = serviceUsuario.procurarPorCpf(usuarios.getCpf());
         if (buscarUsuarios.isPresent()){
-            Usuarios deletar = buscarUsuarios.get();
-            Usuarios deletado = serviceUsuario.deleteByCpf(deletar.getCpf());
+            Usuarios atualizado = serviceUsuario.desativar(usuarios.getCpf());
+            return ResponseEntity.ok(atualizado);
+        }else{
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-
-
 
     }
 

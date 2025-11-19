@@ -7,7 +7,7 @@ public class Usuarios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private boolean ativo;
     private String nome;
     private Long cpf;
 
@@ -20,6 +20,10 @@ public class Usuarios {
     public Usuarios() {
     }
 
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
     public Long getId() {
         return id;
     }
@@ -30,5 +34,9 @@ public class Usuarios {
 
     public Long getCpf() {
         return cpf;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
     }
 }
