@@ -13,22 +13,28 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/usuario")
 public class ControllerUser {
 
     @Autowired
     private ServiceUsuario serviceUsuario;
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<Optional<Usuarios>> get(@RequestBody Usuarios usuarios){
         Optional<Usuarios> listarPorCpf = serviceUsuario.procurarPorCpf(usuarios.getCpf());
 
         return ResponseEntity.ok(listarPorCpf);
     }
+
     @GetMapping("/todosUsuarios")
     public ResponseEntity<List<Usuarios>> getTodosUsuarios (){
-        List<Usuarios> listarPorId = serviceUsuario.procurarTodos();
-        return  ResponseEntity.ok(listarPorId);
+        List<Usuarios> listarTodos = serviceUsuario.procurarTodos();
+        if (listarTodos.isEmpty()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(listarTodos);
     }
+
     @PostMapping("/cadastro")
     public ResponseEntity<Usuarios> salvar(@RequestBody UsersResquestDTO usersResquestDTO){
        try{
