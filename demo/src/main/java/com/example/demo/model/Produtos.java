@@ -10,43 +10,53 @@ import java.util.UUID;
 @Entity
 public class Produtos {
 
-    public Produtos(Long id, String nome_prod, String descricao_prod, String validade_prod, String lote_prod) {
-        this.id = id;
-        this.nome_prod = nome_prod;
-        this.descricao_prod = descricao_prod;
-        this.validade_prod = validade_prod;
-        this.lote_prod = lote_prod;
-    }
+
     public Produtos(){
-
     }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     //private String id_uuid = UUID.randomUUID().toString();
-    private String nome_prod;
-    private String descricao_prod;
-    private String validade_prod;
-    private String lote_prod;
+    private String nomeProd;
+    private String descricaoProd;
+    private String validadeProd;
+    private String loteProd;
+    private boolean ativo = true;
 
+
+
+    public Produtos(Long id,String nomeProd, String descricaoProd, String validadeProd, String loteProd) {
+        this.id = id;
+        this.nomeProd = nomeProd;
+        this.descricaoProd = descricaoProd;
+        this.validadeProd = validadeProd;
+        this.loteProd = loteProd;
+    }
     public Long getId() {
         return id;
     }
 
-    public String getNome_prod() {
-        return nome_prod;
+    public String getNomeProd() {
+        return nomeProd;
     }
 
-    public String getDescricao_prod() {
-        return descricao_prod;
+    public String getDescricaoProd() {
+        return descricaoProd;
     }
 
-    public String getValidade_prod() {
-        return validade_prod;
+    public String getValidadeProd() {
+        return validadeProd;
     }
 
-    public String getLote_prod() {
-        return lote_prod;
+    public String getLoteProd() {
+        return loteProd;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 }

@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @Service
 public class ServiceUsuario {
+
     @Autowired
     private UsersRepository usersRepository;
 
@@ -24,7 +25,6 @@ public class ServiceUsuario {
         return usersRepository.save(usuario);
     }
     public Usuarios salvar(Usuarios usuario) {
-
         return usersRepository.save(usuario);
     }
 
@@ -47,7 +47,6 @@ public class ServiceUsuario {
     public Usuarios deleteByCpf(Long cpf){
        return usersRepository.deleteByCpf(cpf);
     }
-
 
     @Transactional
     public Usuarios desativar(Long cpf){

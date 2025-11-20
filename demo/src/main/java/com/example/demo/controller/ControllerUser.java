@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.Optional;
 
 @RestController
-public class Controllers {
+public class ControllerUser {
+
     @Autowired
     private ServiceUsuario serviceUsuario;
 
@@ -21,12 +24,11 @@ public class Controllers {
 
         return ResponseEntity.ok(listarPorCpf);
     }
-    @GetMapping("/usuarios")
-    public ResponseEntity<Optional<Usuarios>> getTodosUsuarios (@RequestBody  Usuarios usuarios){
-        Optional<Usuarios> listarPorId = serviceUsuario.procurarPorId(usuarios.getId());
+    @GetMapping("/todosUsuarios")
+    public ResponseEntity<List<Usuarios>> getTodosUsuarios (){
+        List<Usuarios> listarPorId = serviceUsuario.procurarTodos();
         return  ResponseEntity.ok(listarPorId);
     }
-
     @PostMapping("/cadastro")
     public ResponseEntity<Usuarios> salvar(@RequestBody UsersResquestDTO usersResquestDTO){
        try{
@@ -52,7 +54,6 @@ public class Controllers {
            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
     }
-
     @Transactional
     @PatchMapping("/inativar")
     public ResponseEntity<Usuarios> inativar(@RequestBody Usuarios usuarios){
@@ -64,7 +65,6 @@ public class Controllers {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
-
     @Transactional
     @PatchMapping("/ativar")
     public  ResponseEntity<Usuarios> ativar (@RequestBody Usuarios usuarios){
