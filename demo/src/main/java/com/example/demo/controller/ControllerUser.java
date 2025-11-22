@@ -19,11 +19,11 @@ public class ControllerUser {
     @Autowired
     private ServiceUsuario serviceUsuario;
 
-    @GetMapping
-    public ResponseEntity<Optional<Usuarios>> get(@RequestBody Usuarios usuarios){
-        Optional<Usuarios> listarPorCpf = serviceUsuario.procurarPorCpf(usuarios.getCpf());
-
-        return ResponseEntity.ok(listarPorCpf);
+    @GetMapping("/{usuarios}")
+    public ResponseEntity<Usuarios> get(@PathVariable Usuarios usuarios){
+       return serviceUsuario.procurarPorId(usuarios.getId())
+               .map(ResponseEntity::ok)
+               .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/todosUsuarios")

@@ -10,13 +10,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/produtos")
 public class ControllerProd {
+
     @Autowired
     private ServiceProd serviceProd;
+
+
+
+    @GetMapping
+    public ResponseEntity<List<Produtos>> listar(){
+        return ResponseEntity.ok(serviceProd.procurarTodos());
+    }
+
+
     @PostMapping("/cadastro")
     public ResponseEntity<Produtos> salvar(@RequestBody ProdutosRequestDTO produtosRequestDTO){
         Optional<Produtos> buscarProd = serviceProd.produtosDados(produtosRequestDTO);

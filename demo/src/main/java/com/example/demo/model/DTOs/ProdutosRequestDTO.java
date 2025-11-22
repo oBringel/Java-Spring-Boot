@@ -1,4 +1,7 @@
 package com.example.demo.model.DTOs;
 
-public record ProdutosRequestDTO( String nomeProd, String descricaoProd, String validadeProd , String loteProd) {
+import jakarta.persistence.Entity;
+
+
+public record ProdutosRequestDTO( Long id ,String nomeProd, String descricaoProd, String validadeProd , String loteProd) {
 }
