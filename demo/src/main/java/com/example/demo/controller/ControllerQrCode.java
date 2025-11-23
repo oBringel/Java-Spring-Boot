@@ -24,6 +24,5 @@ public class ControllerQrCode {
     @GetMapping(value = "/{idproduto}", produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<byte[]> gerarQRCode(@PathVariable Usuarios idUsuario, @PathVariable Produtos idproduto) throws IOException, WriterException {
         return   ResponseEntity.status(HttpStatus.OK).body(serviceQRCode.generateQRCode(idUsuario, idproduto));
-
     }
 }

@@ -20,13 +20,10 @@ public class ControllerProd {
     @Autowired
     private ServiceProd serviceProd;
 
-
-
     @GetMapping
     public ResponseEntity<List<Produtos>> listar(){
         return ResponseEntity.ok(serviceProd.procurarTodos());
     }
-
 
     @PostMapping("/cadastro")
     public ResponseEntity<Produtos> salvar(@RequestBody ProdutosRequestDTO produtosRequestDTO){
@@ -44,7 +41,6 @@ public class ControllerProd {
                 Produtos salvo = serviceProd.salvar(atualizado);
                 return  ResponseEntity.ok(salvo);
             }
-
             Produtos produtos = serviceProd.salvar(produtosRequestDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(produtos);
 
@@ -73,7 +69,6 @@ public class ControllerProd {
         }else {
             return  ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-
     }
     @DeleteMapping("/deletar/{produtos}")
     public ResponseEntity<Void> deletar(@PathVariable Produtos produtos){

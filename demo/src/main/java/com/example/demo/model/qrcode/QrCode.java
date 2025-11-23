@@ -1,5 +1,7 @@
-package com.example.demo.model;
+package com.example.demo.model.qrcode;
 
+import com.example.demo.model.Produtos;
+import com.example.demo.model.Usuarios;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;

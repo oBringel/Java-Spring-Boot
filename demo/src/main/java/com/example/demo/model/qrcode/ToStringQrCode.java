@@ -1,12 +1,11 @@
-package com.example.demo.service;
+package com.example.demo.model.qrcode;
 
 import com.example.demo.model.Produtos;
-import com.example.demo.model.QrCode;
 import com.example.demo.model.Usuarios;
+import com.example.demo.service.ServiceProd;
+import com.example.demo.service.ServiceUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 @Service

@@ -3,6 +3,7 @@ package com.example.demo.service;
 
 import com.example.demo.model.Produtos;
 import com.example.demo.model.Usuarios;
+import com.example.demo.model.qrcode.ToStringQrCode;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
@@ -20,7 +21,7 @@ public class ServiceQRCode {
     @Autowired
     ServiceProd serviceProd;
     @Autowired
-    ToStringQrCode  toStringQrCode;
+    ToStringQrCode toStringQrCode;
 
     public byte[] generateQRCode(Usuarios idUsuario, Produtos idProduto)
             throws WriterException, IOException {
