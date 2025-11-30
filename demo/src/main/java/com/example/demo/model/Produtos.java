@@ -1,8 +1,7 @@
 package com.example.demo.model;
 
+import com.example.demo.model.DTOs.SalvarProdutosRequestDTO;
 import jakarta.persistence.*;
-
-import java.util.UUID;
 
 @Entity
 public class Produtos {
@@ -10,9 +9,11 @@ public class Produtos {
 
     public Produtos(){
     }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nomeProd;
     private String descricaoProd;
     private String validadeProd;
@@ -26,6 +27,15 @@ public class Produtos {
         this.validadeProd = validadeProd;
         this.loteProd = loteProd;
     }
+
+    public Produtos(String s, String s1, String s2, String s3) {
+        this.nomeProd = s;
+        this.descricaoProd = s1;
+        this.validadeProd = s2;
+        this.loteProd = s3;
+    }
+
+
     public Long getId() {
         return id;
     }
@@ -46,11 +56,33 @@ public class Produtos {
         return loteProd;
     }
 
+
+
     public boolean isAtivo() {
         return ativo;
     }
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNomeProd(String nomeProd) {
+        this.nomeProd = nomeProd;
+    }
+
+    public void setDescricaoProd(String descricaoProd) {
+        this.descricaoProd = descricaoProd;
+    }
+
+    public void setValidadeProd(String validadeProd) {
+        this.validadeProd = validadeProd;
+    }
+
+    public void setLoteProd(String loteProd) {
+        this.loteProd = loteProd;
     }
 }

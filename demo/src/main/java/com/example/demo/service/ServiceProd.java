@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.model.DTOs.ProdutosRequestDTO;
+import com.example.demo.model.DTOs.AtualizarProdutosRequestDTO;
+import com.example.demo.model.DTOs.SalvarProdutosRequestDTO;
 import com.example.demo.model.Produtos;
 import com.example.demo.repository.ProdRepository;
 import jakarta.transaction.Transactional;
@@ -15,26 +16,37 @@ public class ServiceProd {
     @Autowired
     private ProdRepository prodRepository;
 
-    public Produtos salvar(Produtos produtos) {
-        return prodRepository.save(produtos);
+
+
+    public Produtos atualiza(AtualizarProdutosRequestDTO dto){
+        Optional<Produtos> existe = procurarPorId(dto.id());
+
+        if (existe.isPresent()){
+            Produtos atualizado = existe.get();
+            atualizado.setId(atualizado.getId());
+            atualizado.setNomeProd(dto.nomeProd());
+            atualizado.setDescricaoProd(dto.descricaoProd());
+            atualizado.setValidadeProd(dto.validadeProd());
+            atualizado.setLoteProd(dto.loteProd());
+            return prodRepository.save(atualizado);
+        }
+        else throw new RuntimeException("produto não encontrado");
     }
 
-    public Produtos salvar(ProdutosRequestDTO produtosRequestDTO){
-        Produtos produtos = new Produtos(
-                null,
-                produtosRequestDTO.nomeProd(),
-                produtosRequestDTO.descricaoProd(),
-                produtosRequestDTO.validadeProd(),
-                produtosRequestDTO.loteProd()
-        );
-        return prodRepository.save(produtos);
+    public Produtos salvar (SalvarProdutosRequestDTO dto){
+      Produtos criar = new Produtos(
+              dto.nomeProd(),
+              dto.descricaoProd(),
+              dto.validadeProd(),
+              dto.loteProd() );
+      return prodRepository.save(criar);
     }
 
     public List<Produtos> procurarTodos(){
         return  prodRepository.findAll();
     }
 
-    public Optional<Produtos> produtosDados(ProdutosRequestDTO produtosRequestDTO){
+    public Optional<Produtos> produtosDados(SalvarProdutosRequestDTO produtosRequestDTO){
         return  prodRepository.findByNomeProdAndDescricaoProdAndValidadeProdAndLoteProd(produtosRequestDTO.nomeProd(), produtosRequestDTO.descricaoProd(), produtosRequestDTO.validadeProd(), produtosRequestDTO.loteProd());
     }
     public Optional<Produtos> procurarPorId(Long id){

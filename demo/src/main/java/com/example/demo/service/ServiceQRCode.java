@@ -39,7 +39,6 @@ public class ServiceQRCode {
         ByteArrayOutputStream pngOutputStream = new ByteArrayOutputStream();
         MatrixToImageWriter.writeToStream(bitMatrix, "PNG", pngOutputStream);
 
-
         return pngOutputStream.toByteArray();
     }
 

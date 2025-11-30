@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.DTOs.ProdutosRequestDTO;
+import com.example.demo.model.DTOs.AtualizarProdutosRequestDTO;
+import com.example.demo.model.DTOs.SalvarProdutosRequestDTO;
 import com.example.demo.model.Produtos;
-import com.example.demo.model.Usuarios;
 import com.example.demo.service.ServiceProd;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,27 +26,14 @@ public class ControllerProd {
     }
 
     @PostMapping("/cadastro")
-    public ResponseEntity<Produtos> salvar(@RequestBody ProdutosRequestDTO produtosRequestDTO){
-        Optional<Produtos> buscarProd = serviceProd.produtosDados(produtosRequestDTO);
-        try{
-            if (buscarProd.isPresent()){
-                Produtos existente = buscarProd.get();
-                Produtos atualizado = new Produtos(
-                        existente.getId(),
-                        produtosRequestDTO.nomeProd(),
-                        produtosRequestDTO.descricaoProd(),
-                        produtosRequestDTO.validadeProd(),
-                        produtosRequestDTO.loteProd()
-                );
-                Produtos salvo = serviceProd.salvar(atualizado);
-                return  ResponseEntity.ok(salvo);
-            }
-            Produtos produtos = serviceProd.salvar(produtosRequestDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body(produtos);
-
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
+    public ResponseEntity<Produtos> salvar(@RequestBody SalvarProdutosRequestDTO produtosRequestDTO){
+      Produtos salvo =  serviceProd.salvar(produtosRequestDTO);
+      return ResponseEntity.ok(salvo);
+    }
+    @PutMapping("/atualizar")
+    public ResponseEntity<Produtos> atualizar(@RequestBody AtualizarProdutosRequestDTO dto){
+        Produtos atualizado = serviceProd.atualiza(dto);
+        return  ResponseEntity.ok(atualizado);
     }
     @Transactional
     @PatchMapping("/inativar/{produtos}")

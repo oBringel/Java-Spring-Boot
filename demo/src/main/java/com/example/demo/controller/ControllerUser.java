@@ -40,7 +40,7 @@ public class ControllerUser {
        try{
              // aqui eu passo no parametro o cpf que o usuario vai mandar, e assim ele valida se existe ou não
           Optional<Usuarios> buscarUsuarios = serviceUsuario.procurarPorCpf(usersResquestDTO.cpf());
-             //se existir, ele vai atualizar apenas o nome, então nos pegamos os getters do buscarUsuarios( que está recebendo o metodo procurarPorCpf)
+             //se existir, ele vai salvar apenas o nome, então nos pegamos os getters do buscarUsuarios( que está recebendo o metodo procurarPorCpf)
            if(buscarUsuarios.isPresent()){
                Usuarios busca = buscarUsuarios.get();
                // com isso, nos criamos um nome Usuário, passando o mesmo Id ja existente,  o novo nome, e o mesmo cpf existente
@@ -84,4 +84,13 @@ public class ControllerUser {
 
     }
 
+    @DeleteMapping("deletar/{usuario}")
+    public ResponseEntity<Void> deletar (@PathVariable Usuarios usuario){
+        Optional<Usuarios> dataId = serviceUsuario.procurarPorId(usuario.getId());
+        if(dataId.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        serviceUsuario.deletarPorId(usuario.getId());
+        return  ResponseEntity.noContent().build();
+    }
 }

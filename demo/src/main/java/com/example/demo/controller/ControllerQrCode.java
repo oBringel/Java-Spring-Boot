@@ -25,4 +25,5 @@ public class ControllerQrCode {
     public ResponseEntity<byte[]> gerarQRCode(@PathVariable Usuarios idUsuario, @PathVariable Produtos idproduto) throws IOException, WriterException {
         return   ResponseEntity.status(HttpStatus.OK).body(serviceQRCode.generateQRCode(idUsuario, idproduto));
     }
+
 }
