@@ -1,6 +1,5 @@
 package com.example.demo.model;
 
-import com.example.demo.model.DTOs.SalvarProdutosRequestDTO;
 import jakarta.persistence.*;
 
 @Entity

@@ -16,6 +16,9 @@ import java.util.Optional;
 
 @Service
 public class ServiceQRCode {
+
+    //NO MOMENTO NÃO É PRIORIDADE, JA QUE O QRCODE NECESSITA PEGAR O LOGIN DO USUARIO, E AINDA N FIZ ISSO
+
     @Autowired
     ServiceUsuario serviceUsuario;
     @Autowired

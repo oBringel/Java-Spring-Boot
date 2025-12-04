@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -45,15 +46,11 @@ public class ServiceEstoque {
     public void registrarSaida( Long idProd, Integer quantidadeSaida){
 
         Estoque estoque  = idFind(idProd).orElseThrow(() -> new RuntimeException("Produto nao encontrado"));
-
         if(estoque.getQuantidade() >= quantidadeSaida) {
             estoque.setQuantidade(estoque.getQuantidade() - quantidadeSaida);
-
-            
             if(estoque.getQuantidade() == 0){
                 estoque.setStatus(Status.INATIVO);
             }
-
         } else {
             throw new RuntimeException("Quantidade insuficiente em estoque");
         }
@@ -84,4 +81,16 @@ public class ServiceEstoque {
         }
         estoqueRepository.deleteById(id);
     }
+
+
+
+    //buscar ID do produto
+    public List<Estoque> procurarTodos(){
+        return  estoqueRepository.findAll();
+    }
+
+    public Optional<Estoque> procurarPorId(Long id){
+        return  estoqueRepository.findById(id);
+    }
+
 }

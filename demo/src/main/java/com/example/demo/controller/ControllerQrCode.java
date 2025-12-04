@@ -4,7 +4,6 @@ package com.example.demo.controller;
 import com.example.demo.model.Produtos;
 import com.example.demo.model.Usuarios;
 import com.example.demo.service.ServiceQRCode;
-
 import com.google.zxing.WriterException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

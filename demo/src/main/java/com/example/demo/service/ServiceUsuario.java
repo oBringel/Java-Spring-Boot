@@ -12,7 +12,8 @@ import java.util.Optional;
 
 @Service
 public class ServiceUsuario {
-
+        //REFATORAR TODO O CODIGO
+        // MAIS PARA FRENTE CRIAR O SERVIÇO SEPARADO - MICROSSERVIÇO
     @Autowired
     private UsersRepository usersRepository;
 

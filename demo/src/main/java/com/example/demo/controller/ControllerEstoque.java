@@ -30,7 +30,7 @@ public class ControllerEstoque {
 
     // add enum ADMIN futuramente
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<Estoque> atulizar(@PathVariable Long id, @RequestBody Estoque dados){
+    public ResponseEntity<Estoque> atualizar(@PathVariable Long id, @RequestBody Estoque dados){
         return ResponseEntity.ok(serviceEstoque.atualizarRegistro(id, dados));
     }
     @DeleteMapping("/deletar/{id}")
