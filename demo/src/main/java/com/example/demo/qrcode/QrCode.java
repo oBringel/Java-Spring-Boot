@@ -1,4 +1,4 @@
-package com.example.demo.model.qrcode;
+package com.example.demo.qrcode;
 
 import com.example.demo.model.Produtos;
 import com.example.demo.model.Usuarios;

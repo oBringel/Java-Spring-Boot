@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.DTOs.UsersResquestDTO;
+import com.example.demo.dto.UsersResquestDTO;
 import com.example.demo.model.Usuarios;
 import com.example.demo.service.ServiceUsuario;
 import jakarta.transaction.Transactional;

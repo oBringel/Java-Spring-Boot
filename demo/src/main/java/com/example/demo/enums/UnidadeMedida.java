@@ -1,4 +1,4 @@
-package com.example.demo.model.estoque.Enum;
+package com.example.demo.enums;
 
 public enum UnidadeMedida {
     UN,

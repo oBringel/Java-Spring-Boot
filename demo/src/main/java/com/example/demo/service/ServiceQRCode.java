@@ -3,13 +3,14 @@ package com.example.demo.service;
 
 import com.example.demo.model.Produtos;
 import com.example.demo.model.Usuarios;
-import com.example.demo.model.qrcode.ToStringQrCode;
+import com.example.demo.qrcode.ToStringQrCode;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.qrcode.QRCodeWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Optional;

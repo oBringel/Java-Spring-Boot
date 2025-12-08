@@ -1,4 +1,4 @@
-package com.example.demo.model.qrcode;
+package com.example.demo.qrcode;
 
 import com.example.demo.model.Produtos;
 import com.example.demo.model.Usuarios;
@@ -6,15 +6,16 @@ import com.example.demo.service.ServiceProd;
 import com.example.demo.service.ServiceUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+
 @Service
 public class ToStringQrCode {
     @Autowired
     ServiceUsuario serviceUsuario;
     @Autowired
     ServiceProd serviceProd;
-
 
 
     public String getString(Usuarios idUsers, Produtos idProd) {
@@ -30,13 +31,13 @@ public class ToStringQrCode {
             Produtos buscandoProd = produtos1.get();
             return
                     "ID do Produto: " + buscandoProd.getId() + "\n" +
-                    "Nome do Produto: " + buscandoProd.getNomeProd() + "\n" +
-                    "Lote: " + buscandoProd.getLoteProd() + "\n" +
-                    "Data de validade: " + buscandoProd.getValidadeProd() + "\n" + "\n" + "\n" +
-                    "UUID do QrCode: " + qrCode.getUuid()  + "\n" + "\n" +
-                     "ID Colaborador: " + buscandoUsuario.getId() + "\n" +
-                    "Colaborador: " + buscandoUsuario.getNome() + "\n" + "\n" +
-                    "Data: " + localDateTime
+                            "Nome do Produto: " + buscandoProd.getNomeProd() + "\n" +
+                            "Lote: " + buscandoProd.getLoteProd() + "\n" +
+                            "Data de validade: " + buscandoProd.getValidadeProd() + "\n" + "\n" + "\n" +
+                            "UUID do QrCode: " + qrCode.getUuid() + "\n" + "\n" +
+                            "ID Colaborador: " + buscandoUsuario.getId() + "\n" +
+                            "Colaborador: " + buscandoUsuario.getNome() + "\n" + "\n" +
+                            "Data: " + localDateTime
                     ;
         }
         return "erro";

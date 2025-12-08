@@ -1,6 +1,6 @@
-package com.example.demo.model.DTOs;
+package com.example.demo.dto;
 
-import com.example.demo.model.estoque.Enum.UnidadeMedida;
+import com.example.demo.enums.UnidadeMedida;
 
 public record MovimentacaoEstoqueDTO( Long produtoId,
                                      Integer quantidade,

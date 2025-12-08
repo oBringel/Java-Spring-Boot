@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.DTOs.AtualizarProdutosRequestDTO;
-import com.example.demo.model.DTOs.SalvarProdutosRequestDTO;
+import com.example.demo.dto.AtualizarProdutosRequestDTO;
+import com.example.demo.dto.SalvarProdutosRequestDTO;
 import com.example.demo.model.Produtos;
 import com.example.demo.service.ServiceProd;
 import jakarta.transaction.Transactional;

@@ -1,6 +1,6 @@
-package com.example.demo.model.estoque;
+package com.example.demo.model;
 
-import com.example.demo.model.estoque.Enum.TipoMovimentacao;
+import com.example.demo.enums.TipoMovimentacao;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;

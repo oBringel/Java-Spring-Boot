@@ -10,11 +10,13 @@ public class Usuarios {
     private boolean ativo = true;
     private String nome;
     private Long cpf;
+
     public Usuarios(Long id, String nome, Long cpf) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
     }
+
     public Usuarios() {
     }
 

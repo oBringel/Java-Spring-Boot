@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class Produtos {
 
 
-    public Produtos(){
+    public Produtos() {
     }
 
     @Id
@@ -19,7 +19,7 @@ public class Produtos {
     private String loteProd;
     private boolean ativo = true;
 
-    public Produtos(Long id,String nomeProd, String descricaoProd, String validadeProd, String loteProd) {
+    public Produtos(Long id, String nomeProd, String descricaoProd, String validadeProd, String loteProd) {
         this.id = id;
         this.nomeProd = nomeProd;
         this.descricaoProd = descricaoProd;
@@ -54,7 +54,6 @@ public class Produtos {
     public String getLoteProd() {
         return loteProd;
     }
-
 
 
     public boolean isAtivo() {

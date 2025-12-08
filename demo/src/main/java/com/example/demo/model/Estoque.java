@@ -1,11 +1,11 @@
-package com.example.demo.model.estoque;
+package com.example.demo.model;
 
-import com.example.demo.model.estoque.Enum.Status;
-import com.example.demo.model.estoque.Enum.UnidadeMedida;
-import com.example.demo.model.Produtos;
+import com.example.demo.enums.Status;
+import com.example.demo.enums.UnidadeMedida;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Entity
@@ -25,35 +25,34 @@ public class Estoque {
     private Integer quantidade;
 
     @ManyToOne
+    @JoinColumn(name = "produto_id")
     private Produtos produto;
 
     @OneToMany(mappedBy = "estoque")
     private List<MovimentacaoEstoque> historico;
 
-    private LocalDateTime localDateTime;
+    private String dataRequisicao = LocalDateTime.now()
+            .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
 
-    public Estoque(Produtos produto, Integer quantidade , Status status, UnidadeMedida unidade) {
+    public Estoque(Produtos produto, Integer quantidade, Status status, UnidadeMedida unidade, String dataRequisicao) {
         this.produto = produto;
         this.quantidade = quantidade;
         this.status = status;
         this.unidadeMedida = unidade;
-        this.localDateTime = LocalDateTime.now();
+        this.dataRequisicao = dataRequisicao;
     }
 
 
-    public Estoque( Long id,Produtos produto, Integer quantidade , Status status, UnidadeMedida unidade) {
+    public Estoque(Long id, Produtos produto, Integer quantidade, Status status, UnidadeMedida unidade, String dataRequisicao) {
         this.produto = produto;
         this.quantidade = quantidade;
         this.status = status;
         this.unidadeMedida = unidade;
-        this.localDateTime = LocalDateTime.now();
+        this.dataRequisicao = dataRequisicao;
     }
 
 
     public Estoque() {
-    }
-
-    public Estoque(Estoque atualizado) {
     }
 
 
@@ -66,15 +65,16 @@ public class Estoque {
     }
 
     public Integer setQuantidade(Integer quantidade) {
-       return this.quantidade = quantidade;
+        return this.quantidade = quantidade;
     }
 
-    public LocalDateTime getLocalDateTime() {
-        return localDateTime;
+
+    public String getDataRequisicao() {
+        return dataRequisicao;
     }
 
-    public void setLocalDateTime(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
+    public void setDataRequisicao(String dataRequisicao) {
+        this.dataRequisicao = dataRequisicao;
     }
 
     public Long getId() {
@@ -118,7 +118,7 @@ public class Estoque {
     @Override
     public String toString() {
         return "Estoque{" +
-                "localDateTime=" + localDateTime +
+                "localDateTime=" + dataRequisicao +
                 ", historico=" + historico +
                 ", produto=" + produto +
                 ", unidadeMedida=" + unidadeMedida +

@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.model.DTOs.AtualizarProdutosRequestDTO;
-import com.example.demo.model.DTOs.SalvarProdutosRequestDTO;
+import com.example.demo.dto.AtualizarProdutosRequestDTO;
+import com.example.demo.dto.SalvarProdutosRequestDTO;
 import com.example.demo.model.Produtos;
 import com.example.demo.repository.ProdRepository;
 import jakarta.transaction.Transactional;
@@ -17,11 +17,10 @@ public class ServiceProd {
     private ProdRepository prodRepository;
 
 
-
-    public Produtos atualiza(AtualizarProdutosRequestDTO dto){
+    public Produtos atualiza(AtualizarProdutosRequestDTO dto) {
         Optional<Produtos> existe = procurarPorId(dto.id());
 
-        if (existe.isPresent()){
+        if (existe.isPresent()) {
             Produtos atualizado = existe.get();
             atualizado.setId(atualizado.getId());
             atualizado.setNomeProd(dto.nomeProd());
@@ -29,37 +28,37 @@ public class ServiceProd {
             atualizado.setValidadeProd(dto.validadeProd());
             atualizado.setLoteProd(dto.loteProd());
             return prodRepository.save(atualizado);
-        }
-        else throw new RuntimeException("produto não encontrado");
+        } else throw new RuntimeException("produto não encontrado");
     }
 
-    public Produtos salvar (SalvarProdutosRequestDTO dto){
-      Produtos criar = new Produtos(
-              dto.nomeProd(),
-              dto.descricaoProd(),
-              dto.validadeProd(),
-              dto.loteProd() );
-      return prodRepository.save(criar);
+    public Produtos salvar(SalvarProdutosRequestDTO dto) {
+        Produtos criar = new Produtos(
+                dto.nomeProd(),
+                dto.descricaoProd(),
+                dto.validadeProd(),
+                dto.loteProd());
+        return prodRepository.save(criar);
     }
 
-    public List<Produtos> procurarTodos(){
-        return  prodRepository.findAll();
+    public List<Produtos> procurarTodos() {
+        return prodRepository.findAll();
     }
 
-    public Optional<Produtos> produtosDados(SalvarProdutosRequestDTO produtosRequestDTO){
-        return  prodRepository.findByNomeProdAndDescricaoProdAndValidadeProdAndLoteProd(produtosRequestDTO.nomeProd(), produtosRequestDTO.descricaoProd(), produtosRequestDTO.validadeProd(), produtosRequestDTO.loteProd());
+    public Optional<Produtos> produtosDados(SalvarProdutosRequestDTO produtosRequestDTO) {
+        return prodRepository.findByNomeProdAndDescricaoProdAndValidadeProdAndLoteProd(produtosRequestDTO.nomeProd(), produtosRequestDTO.descricaoProd(), produtosRequestDTO.validadeProd(), produtosRequestDTO.loteProd());
     }
-    public Optional<Produtos> procurarPorId(Long id){
-        return  prodRepository.findById(id);
+
+    public Optional<Produtos> procurarPorId(Long id) {
+        return prodRepository.findById(id);
     }
 
     @Transactional
-    public Produtos ativar(Long id){
+    public Produtos ativar(Long id) {
         Optional<Produtos> buscarProd = prodRepository.findById(id);
-        try{
-            if (buscarProd.isPresent()){
+        try {
+            if (buscarProd.isPresent()) {
                 prodRepository.ativarProduto(id);
-                Produtos produtos =  buscarProd.get();
+                Produtos produtos = buscarProd.get();
                 produtos.setAtivo(true);
                 return produtos;
             }
@@ -69,11 +68,12 @@ public class ServiceProd {
         }
 
     }
+
     @Transactional
-    public  Produtos desativar (Long id){
+    public Produtos desativar(Long id) {
         Optional<Produtos> buscarProd = prodRepository.findById(id);
-        try{
-            if (buscarProd.isPresent()){
+        try {
+            if (buscarProd.isPresent()) {
                 prodRepository.desativarProduto(id);
                 Produtos produtos = buscarProd.get();
                 produtos.setAtivo(false);
@@ -86,7 +86,7 @@ public class ServiceProd {
     }
 
 
-    public void excluir(Long id){
-         prodRepository.deleteById(id);
+    public void excluir(Long id) {
+        prodRepository.deleteById(id);
     }
 }
